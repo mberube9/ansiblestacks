@@ -1,7 +1,7 @@
 ---
 # tasks file for sshwait
 
-- name: Wait for SSH to come up
+- name: Waiting for SSH to come up
   wait_for:
     host: "{{ item }}"
     port: 22
