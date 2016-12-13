@@ -13,20 +13,18 @@
       password: "{{ clouds.devstack.auth.password }}"
       project_name: "{{ clouds.devstack.auth.project_name }}"
     name: "{{ service_id}}-{{ server_group }}{{ item }}"
-    image: "{{ server_image }}" 
+    image: "{{ server_image }}"
     flavor: "{{ server_flavor }}"
     security_groups: "{{ server_securitygroups }}"
     auto_ip: "{{ server_autoip }}"
     meta: "service_id={{ service_id }}"
-  register: "{{ server_group }}{{ item }}"
+  register: "servers"
   with_sequence: count="{{ server_qty }}"
 
-- name: Add new instance in Ansible's inventory
-  add_host:
-    hostname: "{{ server_group}}{{ item }}.openstack.accessIPv4 }}"
-    groups: "{{ server_group }}"
-  with_sequence: count="{{ server_qty }}"
+- debug: var=servers
 
-
-
-
+#- name: Add new instance in Ansible's inventory
+#  add_host:
+#    hostname: "{{ {{ server_group}}{{ item }}.openstack.accessIPv4 }}"
+#    groups: "{{ server_group }}"
+#  with_sequence: count="{{ server_qty }}"
