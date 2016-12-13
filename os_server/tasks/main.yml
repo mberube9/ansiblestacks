@@ -21,10 +21,16 @@
   register: "servers"
   with_sequence: count="{{ server_qty }}"
 
-- debug: var=servers
+#- debug: var=servers
 
-#- name: Add new instance in Ansible's inventory
-#  add_host:
-#    hostname: "{{ {{ server_group}}{{ item }}.openstack.accessIPv4 }}"
-#    groups: "{{ server_group }}"
-#  with_sequence: count="{{ server_qty }}"
+- name: Add new instance in Ansible's inventory
+  add_host:
+    hostname: "{{ servers.results.openstack.accessIPv4 }}"
+    groups: "{{ server_group }},{{ service_id }}"
+  with_sequence: count="{{ server_qty }}"
+
+
+- name: Display all variables/facts known for a host
+  debug:
+    var: hostvars[inventory_hostname]
+    verbosity: 4
