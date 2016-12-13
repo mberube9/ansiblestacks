@@ -5,7 +5,8 @@
   wait_for:
     host: "{{ item }}"
     port: 22
-    delay: 60
+    delay: 0
+    sleep: 5
     timeout: 320
     state: started
   with_items: "{{ server_group }}"
