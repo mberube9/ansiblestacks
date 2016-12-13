@@ -11,14 +11,15 @@
 
   roles:
     - { role: os_server, service_id: "{{ uuid.stdout }}", server_qty: "{{ webqty }}", server_image: 'centos7', server_flavor: 'm1.tiny', server_group: 'web' }
-#    - { role: os_server, service_id: "{{ uuid.stdout }}", server_qty: 1, server_image: 'centos7', server_flavor: 'm1.tiny', server_group: 'db' }
+    - { role: os_server, service_id: "{{ uuid.stdout }}", server_qty: 1, server_image: 'centos7', server_flavor: 'm1.tiny', server_group: 'db' }
     - { role: sshwait, server_group: "{{ hostvars[inventory_hostname].groups.web }}" }
+    - { role: sshwait, server_group: "{{ hostvars[inventory_hostname].groups.db }}" }
 
-#- hosts: web
-#  roles:
-#    - common
-#    - apache
+- hosts: web
+  roles:
+    - common
+    - apache
 
-#- hosts: db
-#  roles:
-#    - common
+- hosts: db
+  roles:
+    - common
