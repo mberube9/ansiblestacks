@@ -25,9 +25,9 @@
 
 - name: Add new instance in Ansible's inventory
   add_host:
-    hostname: "{{ servers.results.openstack.accessIPv4 }}"
+    hostname: "{{ item.openstack.accessIPv4 }}"
     groups: "{{ server_group }},{{ service_id }}"
-  with_sequence: count="{{ server_qty }}"
+  with_items: "{{ servers.results }}"
 
 
 - name: Display all variables/facts known for a host
